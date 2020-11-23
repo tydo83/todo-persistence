@@ -2,32 +2,32 @@
   "todos": [
     {
       "text": "make todo app better",
-      "complete": true,
+      "isComplete": true,
       "priority": 1
     },
     {
       "text": "finish the emoji movie project",
-      "complete": true,
+      "isComplete": true,
       "priority": 2
     },
     {
       "text": "catch up on netflix",
-      "complete": false,
+      "isComplete": false,
       "priority": 1
     },
     {
       "text": "read book for book club",
-      "complete": false,
+      "isComplete": false,
       "priority": 2
     },
     {
       "text": "internalize what a callback is",
-      "complete": true,
+      "isComplete": true,
       "priority": 1
     },
     {
       "text": "really get into callbacks",
-      "complete": false,
+      "isComplete": false,
       "priority": 1
     }
   ]

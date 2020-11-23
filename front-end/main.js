@@ -12,7 +12,6 @@ const interface = readline.createInterface({
 const displayMenu = function() {
   const menu = `
 Your options are:
-
 1. Add a todo.
 2. Remove a todo.
 3. Remove all completed todos.
@@ -28,7 +27,7 @@ Your options are:
 const displayTodos = function() {
   console.log('\nHere are your current todos:\n')
   for (let i = 0; i < todos.length; i++) {
-    console.log(i + 1 + '. ' + todos[i].text + ' ' + (todo[i].isComplete ? '✅' : '✖'));
+    console.log(i + 1 + '. ' + todos[i].text + ' ' + (todos[i].isComplete ? '✅' : '✖'));
   }
 }
 
@@ -40,12 +39,14 @@ const add = function(answer) {
   }
 
   todos.unshift(todo);
+  saveTodos();
   displayTodos();
   displayMenu();
 }
 
 const remove = function(num) {
   todos.splice(num - 1, 1);
+  saveTodos();
   displayTodos();
   displayMenu();
 }
@@ -120,5 +121,23 @@ const handleMenu = function(cmd) {
   }
 }
 
-displayTodos();
-displayMenu();
+fs.readFile(PATH_TO_TODOS_FILE, (err, data) => {
+  if (err) {
+    throw err;
+  }
+  const obj = JSON.parse(data);
+  todos = obj.todos
+  displayTodos();
+  displayMenu();
+})
+
+const saveTodos = () => {
+  const obj = {todos: todos};
+  const data = JSON.stringify(obj, null, 2);
+  fs.writeFile(PATH_TO_TODOS_FILE, data, 'utf8', (err) => {
+    if (err) {
+      throw err;
+    }
+  console.log("Your todo list is updated\n")
+  })
+}
